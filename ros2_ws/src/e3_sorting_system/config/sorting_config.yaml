@@ -1,0 +1,191 @@
+task_manager:
+  ros__parameters:
+    detections_topic: /e3/detections
+    action_name: /e3/pick_and_sort
+
+    use_sim_time: true
+    startup_wait_timeout: 120.0
+    detection_wait_timeout: 5.0
+    action_wait_timeout: 15.0
+    maximum_assignment_distance: 45.0
+    minimum_confidence: 0.70
+    stable_detection_frames: 3
+
+    grid_ids:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+
+    grid_1.pixel_center: [203.5, 308.0]
+    grid_1.model_name: pick_object_1
+
+    grid_2.pixel_center: [204.0, 269.5]
+    grid_2.model_name: pick_object_2
+
+    grid_3.pixel_center: [320.0, 308.0]
+    grid_3.model_name: pick_object_3
+
+    grid_4.pixel_center: [320.0, 260.0]
+    grid_4.model_name: pick_object_4
+
+    grid_5.pixel_center: [438.5, 308.0]
+    grid_5.model_name: pick_object_5
+
+    grid_6.pixel_center: [436.0, 269.5]
+    grid_6.model_name: pick_object_6
+
+    supported_classes:
+      - comb
+      - mouse
+
+    comb.destination_model: red_bin
+    mouse.destination_model: blue_bin
+
+    log_root: ~/e3_ws/logs/sorting
+
+e3_pick_action_server:
+  ros__parameters:
+    action_name: /e3/pick_and_sort
+    dry_run: true
+    feedback_delay: 0.4
+    group_name: mecharm_arm
+    ik_link_name: grasp_attach_link
+    frame_id: world
+    ik_service: /compute_ik
+    ik_avoid_collisions: false
+    ik_seed_max_distance: 1.0
+    grid_1.pick_joints: [0.724953, 0.819108, -0.589521, -0.000043, 1.337840, 0.734401]
+    grid_2.pick_joints: [0.6010395155, 1.1610209601, -1.2097142381,
+                         0.0135643530, 1.5434936893, 0.6239476983]
+    grid_3.pick_joints: [0.0299717092, 0.4072309339, 0.0607839625,
+                         -0.0485094300, 1.1382044377, 0.0878735103]
+    grid_4.pick_joints: [-0.0108474300, 0.8006787379, -0.5972599467,
+                         0.0083696301, 1.3114291338, 0.0472812917]
+    grid_5.pick_joints: [-0.7690627850, 0.8152957491, -0.5632076370,
+                         0.0456492524, 1.3115248216, -0.7278116679]
+    grid_6.pick_joints: [-0.6028831361, 1.1625077805, -1.2096582565,
+                         -0.0172381553, 1.5396605038, -0.6220880451]
+    grid_1.lift_joints: [0.8028159892, 0.6055746569, -0.6703335030,
+      0.0003421158, 1.6267768699, 0.8106297914]
+    grid_2.lift_joints: [0.6607262926, 0.9627520970, -1.2705171831,
+      0.0147027684, 1.8008709198, 0.6831425012]
+    grid_3.lift_joints: [0.0349721737, 0.1044865427, 0.0144229312,
+      -0.0408897965, 1.4933222094, 0.0735970607]
+    grid_4.lift_joints: [-0.0144077556, 0.5373394226, -0.5901479584,
+      0.0028369126, 1.5736648222, 0.0480247021]
+    grid_5.lift_joints: [-0.8475973797, 0.6088910297, -0.6532995754,
+      0.0418098551, 1.6059558881, -0.7894696733]
+    grid_6.lift_joints: [-0.6566222784, 0.9591483940, -1.2519720880,
+      -0.0188379429, 1.7936285878, -0.6882079693]
+    grid_1.lift_stage_1_joints: [0.729194, 0.808804, -0.741697,
+                                 -0.004483, 1.508453, 0.737744]
+    grid_1.clearance_joints: [0.7002439295, 0.9082026653, -1.2221155915,
+                              -0.0161130230, 1.8575642789, 0.7573696093]
+    # Slot offsets are ordered left to right.
+    red_bin.center_world_xy: [0.0, 0.18]
+    red_bin.slot_offsets_x: [-0.040, 0.0, 0.040]
+    red_bin.slot_release_z: 0.438
+    blue_bin.center_world_xy: [0.0, -0.18]
+    blue_bin.slot_offsets_x: [-0.040, 0.0, 0.040]
+    blue_bin.slot_release_z: 0.438
+    # Recorded calibration only; not consumed by the motion sequence.
+    red_bin.approach_joints: [1.5780840510, 0.8013771349, -0.9467428297,
+                              -0.0332285864, 1.7100726856, 1.6302872993]
+    red_bin.left_release_joints: [1.7858465337, 0.8430637514,
+                                  -0.7403920297, -0.0305444414,
+                                  1.4737572650, 1.8456349341]
+    red_bin.center_intermediate_joints: [1.5815950842, 0.8196593210,
+                                         -0.8260416017, -0.0362723402,
+                                         1.5886831424, 1.6553670456]
+    red_bin.center_release_joints: [1.5860181203, 0.8380505628,
+                                    -0.7422356759, -0.0370827207,
+                                    1.4941800225, 1.6558392442]
+    red_bin.right_release_joints: [1.3685759249, 0.8158492750,
+                                   -0.6887449752, -0.0423251675,
+                                   1.4320815049, 1.4299657847]
+    blue_bin.approach_joints: [-1.5779212067, 0.8827475163, -1.0850132822,
+                               0.0335590192, 1.7794357656, -1.5141581248]
+    blue_bin.left_release_joints: [-1.7954059604, 0.8717468305,
+                                   -0.8018801372, 0.0282933348,
+                                   1.4989574536, -1.7356545103]
+    blue_bin.center_release_joints: [-1.5786027935, 0.8032457336,
+                                     -0.6907313796, 0.0336656462,
+                                     1.4543002999, -1.5214733686]
+    blue_bin.right_release_joints: [-1.3668479619, 0.8719069661,
+                                    -0.8194452148, 0.0267157095,
+                                    1.5002830670, -1.2996634482]
+    # Restricted one-slot calibration. Results are logged, never persisted.
+    classification_transport_enabled: false
+    grid_pick_calibration: false
+    bin_slot_calibration: false
+    calibration_bin: ""
+    calibration_slot: ""
+    calibration_execute: false
+    bin_horizontal_tolerance: 0.004
+    attach_enabled: false
+    direct_pick_calibration: false
+    lift_calibration: false
+    lift_calibration_height: 0.045
+    return_height_tolerance: 0.005
+    object_settle_time: 1.0
+    local_center_calibration: false
+    local_center_tolerance: 0.0035
+    local_center_max_iterations: 3
+    local_center_max_displacement: 0.012
+    local_ik_seed_max_distance: 0.40
+    attach_distance_limit: 0.02
+    gripper_position_tolerance: 0.03
+    joint_states_topic: /joint_states
+    joint_state_timeout: 5.0
+    joint_state_max_age: 1.0
+    planning_service: /plan_kinematic_path
+    planning_pipeline_id: ompl
+    planner_id: RRTConnect
+    entity_service: /gazebo/get_entity_state
+    attach_service: /gazebo/attach
+    detach_service: /gazebo/detach
+    arm_action: /arm_controller/follow_joint_trajectory
+    gripper_topic: /gripper_position_controller/commands
+    joint_names:
+      - joint1_to_base
+      - joint2_to_joint1
+      - joint3_to_joint2
+      - joint4_to_joint3
+      - joint5_to_joint4
+      - joint6_to_joint5
+    # World-axis offsets from dynamically queried Gazebo model positions.
+    grasp_offset: [0.0175, 0.0164, 0.0225]
+    pregrasp_height: 0.029
+    grasp_orientation: [0.042, -0.046, -0.001, 0.998]
+    release_offset: [0.0, 0.0, 0.124]
+    release_orientation: [0.000682, -0.702836, -0.000499, 0.711351]
+    # No existing named home was found; validate zero pose before real execution.
+    home_joints: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    service_timeout: 10.0
+    ik_timeout: 5.0
+    planning_time: 5.0
+    planning_attempts: 5
+    joint_tolerance: 0.01
+    velocity_scaling: 0.2
+    acceleration_scaling: 0.2
+    execution_timeout: 60.0
+    cancel_timeout: 5.0
+    open_gripper_position: 0.15
+    close_gripper_position: -0.31
+    gripper_wait: 2.0
+    robot_model: mecharm_270
+    robot_link: grasp_attach_link
+    object_link: object_link
+
+
+e3_object_detector:
+  ros__parameters:
+    use_sim_time: true
+    image_topic: /e3/camera/overhead_camera/image_raw
+    detections_topic: /e3/detections
+    annotated_topic: /e3/detections/image
+    minimum_area: 120.0
+    maximum_area: 4000.0
