@@ -1,0 +1,13 @@
+# Goal
+int32 grid_id
+string object_class
+string object_model
+---
+# Result
+bool success
+string final_state
+string message
+---
+# Feedback
+string stage
+float32 progress

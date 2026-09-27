@@ -1,0 +1,11 @@
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+ros2_ws/.pytest_cache/
+ros2_ws/src/**/.pytest_cache/
+ros2_ws/src/**/__pycache__/
+*.pyc
+report/*.pdf
+report/*.aux
+report/*.log
+report/*.synctex.gz
