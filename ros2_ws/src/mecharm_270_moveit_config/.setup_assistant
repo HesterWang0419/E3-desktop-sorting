@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: e5_arm_sim
+    relative_path: urdf/mecharm_270_m5_sim.urdf.xacro
+  srdf:
+    relative_path: config/firefighter.srdf
+  package_settings:
+    author_name: Eve
+    author_email: kamikoshi@outlook.com
+    generated_timestamp: 1788839314
